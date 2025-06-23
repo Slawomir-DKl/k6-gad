@@ -1,6 +1,8 @@
 import { check } from "k6";
 import { Options } from "k6/options";
 import http from "k6/http";
+import { chooseOptions, OptionsType } from "../src/options.ts";
+import { BASE_API_URL } from "../config.ts";
 
 export const options: Options = {
   thresholds: {
@@ -11,14 +13,7 @@ export const options: Options = {
     // arbitrary name of scenario
     average_load: {
       executor: "ramping-vus",
-      stages: [
-        // ramp up to average load of 20 virtual users
-        { duration: "10s", target: 20 },
-        // maintain load
-        { duration: "10s", target: 20 },
-        // ramp down to zero
-        { duration: "5s", target: 0 },
-      ],
+      stages: chooseOptions(OptionsType.rampingVus),
     },
   },
 };
