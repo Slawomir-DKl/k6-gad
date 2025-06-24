@@ -1,14 +1,15 @@
 import { Options } from "k6/options";
 
 export enum OptionsType {
-  rampingVus = "rampingVus",
   constantVus = "constantVus",
+  rampingVus = "rampingVus",
+  runOnce = "runOnce",
 }
 
 export function chooseOptions(
   optionsVariant: OptionsType,
   durationInSeconds: number = 10,
-  vus: number = 5
+  vus: number = 5,
 ): Options {
   if (durationInSeconds <= 0) {
     throw new Error("Duration should be positive number");
@@ -29,6 +30,25 @@ export function chooseOptions(
   const maintenanceDuration = durationInSeconds - 2 * rampDuration;
 
   const optionsMap: Record<OptionsType, Options> = {
+    [OptionsType.constantVus]: {
+      scenarios: {
+        constant_load: {
+          executor: "constant-vus",
+          vus: vus,
+          duration: `${durationInSeconds}s`,
+        },
+      },
+    },
+    [OptionsType.runOnce]: {
+      scenarios: {
+        contacts: {
+          executor: "per-vu-iterations",
+          vus: 1,
+          iterations: 1,
+          maxDuration: `1s`,
+        },
+      },
+    },
     [OptionsType.rampingVus]: {
       thresholds: {
         http_req_failed: ["rate<0.01"],
@@ -42,16 +62,6 @@ export function chooseOptions(
             { duration: `${maintenanceDuration}s`, target: vus },
             { duration: `${rampDuration}s`, target: 0 },
           ],
-        },
-      },
-    },
-
-    [OptionsType.constantVus]: {
-      scenarios: {
-        constant_load: {
-          executor: "constant-vus",
-          vus: vus,
-          duration: `${durationInSeconds}s`,
         },
       },
     },
