@@ -9,8 +9,8 @@ export function prepareHeaders(authorization: Boolean): Headers {
 
   if (authorization) {
     const res = http.post(`${BASE_API_URL}/login`, {
-      email: "Moses.Armstrong@Feest.ca",
-      password: "test1",
+      email: __ENV.USER_EMAIL,
+      password: __ENV.USER_PASSWORD,
     });
 
     check(res, {
