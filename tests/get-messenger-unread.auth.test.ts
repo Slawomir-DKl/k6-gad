@@ -1,16 +1,16 @@
 import { check } from "k6";
 import { Options } from "k6/options";
 import http from "k6/http";
-import { chooseOptions, OptionsType } from "../src/options.ts";
-import { prepareHeaders } from "../src/setup.ts";
-import { Headers } from "../src/interfaces.ts";
 import { BASE_API_URL } from "../config.ts";
-
-export const options: Options = chooseOptions(OptionsType.runOnce);
+import { chooseOptions, OptionsType } from "../src/options.ts";
+import { Headers } from "../src/interfaces.ts";
+import { prepareHeaders } from "../src/setup.ts";
 
 const testWithAuthorization = true;
 const endpoint = "messenger";
 const params = "/unread";
+
+export const options: Options = chooseOptions(OptionsType.runOnce);
 
 export function setup(): Headers {
   const headers = prepareHeaders(testWithAuthorization);

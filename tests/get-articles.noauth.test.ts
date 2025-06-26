@@ -3,14 +3,14 @@ import { Options } from "k6/options";
 import http from "k6/http";
 import { BASE_API_URL } from "../config.ts";
 import { chooseOptions, OptionsType } from "../src/options.ts";
-import { prepareHeaders } from "../src/setup.ts";
 import { Headers } from "../src/interfaces.ts";
-
-export const options: Options = chooseOptions(OptionsType.runOnce);
+import { prepareHeaders } from "../src/setup.ts";
 
 const testWithAuthorization = false;
 const endpoint = "articles";
 const params = "?_limit=6&_page=1&_sort=date&_order=DESC";
+
+export const options: Options = chooseOptions(OptionsType.runOnce);
 
 export function setup(): Headers {
   const headers = prepareHeaders(testWithAuthorization);
