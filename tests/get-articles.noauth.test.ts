@@ -5,15 +5,18 @@ import { BASE_API_URL } from "../config.ts";
 import { chooseOptions, OptionsType } from "../src/options.ts";
 import { Headers } from "../src/interfaces.ts";
 import { prepareHeaders } from "../src/setup.ts";
+import { AuthorizationType } from "../src/enums.ts";
 
-const testWithAuthorization = false;
+// Config
+const authorizationType = AuthorizationType.noAuthorization;
 const endpoint = "articles";
 const params = "?_limit=6&_page=1&_sort=date&_order=DESC";
 
+// Test
 export const options: Options = chooseOptions(OptionsType.runOnce);
 
 export function setup(): Headers {
-  const headers = prepareHeaders(testWithAuthorization);
+  const headers = prepareHeaders(authorizationType);
   return headers;
 }
 

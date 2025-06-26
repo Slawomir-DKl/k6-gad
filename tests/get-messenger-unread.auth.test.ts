@@ -5,15 +5,18 @@ import { BASE_API_URL } from "../config.ts";
 import { chooseOptions, OptionsType } from "../src/options.ts";
 import { Headers } from "../src/interfaces.ts";
 import { prepareHeaders } from "../src/setup.ts";
+import { AuthorizationType } from "../src/enums.ts";
 
-const testWithAuthorization = true;
+// Config
+const authorizationType = AuthorizationType.regularUser;
 const endpoint = "messenger";
 const params = "/unread";
 
+// Test
 export const options: Options = chooseOptions(OptionsType.runOnce);
 
 export function setup(): Headers {
-  const headers = prepareHeaders(testWithAuthorization);
+  const headers = prepareHeaders(authorizationType);
   return headers;
 }
 

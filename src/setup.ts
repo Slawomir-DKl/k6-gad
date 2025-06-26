@@ -3,14 +3,23 @@ import { check } from "k6";
 import { BASE_API_URL } from "../config.ts";
 import { defaultHeaders } from "./global-variables.ts";
 import { Headers } from "./interfaces.ts";
+import { AuthorizationType } from "./enums.ts";
 
-export function prepareHeaders(authorization: Boolean): Headers {
+export function prepareHeaders(authorization: AuthorizationType): Headers {
   const headers: Headers = defaultHeaders;
 
-  if (authorization) {
+  if (authorization != AuthorizationType.noAuthorization) {
+    let userLogin = __ENV.USER_EMAIL;
+    let userPassword = __ENV.USER_PASSWORD;
+
+    if (authorization === AuthorizationType.adminUser) {
+      userLogin = __ENV.ADMIN_EMAIL;
+      userPassword = __ENV.ADMIN_PASSWORD;
+    }
+
     const res = http.post(`${BASE_API_URL}/login`, {
-      email: __ENV.USER_EMAIL,
-      password: __ENV.USER_PASSWORD,
+      email: userLogin,
+      password: userPassword,
     });
 
     check(res, {
