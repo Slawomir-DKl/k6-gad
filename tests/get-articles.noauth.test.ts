@@ -8,11 +8,9 @@ import { Headers } from "../src/interfaces.ts";
 
 export const options: Options = chooseOptions(OptionsType.runOnce);
 
-const testWithAuthorization = true;
-// const endpoint = "articles";
-// const params = "?_limit=6&_page=1&_sort=date&_order=DESC";
-const endpoint = "messenger";
-const params = "/unread";
+const testWithAuthorization = false;
+const endpoint = "articles";
+const params = "?_limit=6&_page=1&_sort=date&_order=DESC";
 
 export function setup(): Headers {
   const headers = prepareHeaders(testWithAuthorization);
@@ -26,5 +24,4 @@ export default function (headers: Headers) {
     [`Status for GET request on endpoint "${endpoint}" - expected: 200, received: ${res.status}`]:
       (res) => res.status === 200,
   });
-  // console.log(headers, res.body);
 }

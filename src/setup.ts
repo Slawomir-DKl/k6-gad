@@ -1,7 +1,7 @@
 import http from "k6/http";
 import { check } from "k6";
-import { BASE_API_URL } from "../config";
-import { defaultHeaders } from "./global-variables";
+import { BASE_API_URL } from "../config.ts";
+import { defaultHeaders } from "./global-variables.ts";
 import { Headers } from "./interfaces.ts";
 
 export function prepareHeaders(authorization: Boolean): Headers {
