@@ -1,10 +1,5 @@
 import { Options } from "k6/options";
-
-export enum OptionsType {
-  constantVus = "constantVus",
-  rampingVus = "rampingVus",
-  runOnce = "runOnce",
-}
+import { OptionsType } from "./enums";
 
 export function chooseOptions(
   optionsVariant: OptionsType,

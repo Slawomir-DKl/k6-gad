@@ -2,10 +2,10 @@ import { check } from "k6";
 import { Options } from "k6/options";
 import http from "k6/http";
 import { BASE_API_URL } from "../config.ts";
-import { chooseOptions, OptionsType } from "../src/options.ts";
+import { chooseOptions } from "../src/options.ts";
 import { Headers } from "../src/interfaces.ts";
 import { prepareHeaders } from "../src/setup.ts";
-import { AuthorizationType } from "../src/enums.ts";
+import { AuthorizationType, OptionsType } from "../src/enums.ts";
 
 // Config
 const authorizationType = AuthorizationType.regularUser;
