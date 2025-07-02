@@ -1,5 +1,5 @@
 import { Options } from "k6/options";
-import { OptionsType } from "./enums";
+import { OptionsType } from "./enums.ts";
 
 export function chooseOptions(
   optionsVariant: OptionsType,

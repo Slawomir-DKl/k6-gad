@@ -1,6 +1,7 @@
 {
   "plugins": ["k6-linting-rules"],
   "rules": {
-    "k6-linting-rules/k6": 2
+    "k6-linting-rules/k6": 2,
+    "import/extensions": ["error", "always", { "ts": "never" }]
   }
 }

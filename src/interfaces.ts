@@ -1,3 +1,3 @@
 export interface Headers {
-  [key: string]: any;
+  [key: string]: string;
 }

@@ -36,7 +36,9 @@ export function prepareHeaders(authorization: AuthorizationType): Headers {
         body = JSON.parse(res.body);
         token = body.access_token;
       } catch (error) {
-        throw new Error(`Unable to parse response body: ${res.body}`);
+        throw new Error(
+          `Unable to parse response body: ${res.body}. Error: ${error} `,
+        );
       }
     } else {
       throw new Error(
